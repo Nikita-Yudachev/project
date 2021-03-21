@@ -1,0 +1,48 @@
+def type_card(n):
+    """Функция определяет тип карты"""
+    if n[0] == '4':
+        return 'Visa'
+    elif n[0] == '5':
+        return 'MasterCard'
+    elif n[:2] == '37':
+        return 'American Express'
+    elif n[0] == '6':
+        return 'Discover'
+    elif n[0] == '2':
+        return 'Мир'
+    else:
+        print('Неверный номер карты')
+
+
+def pravilnay(st):
+    """Функция определяет, является ли карта правильной"""
+    if 13 <= len(st) <= 16:
+        j = 1
+        q = []
+        types = type_card(st)
+        print('Тип карты:', types)
+        strev = list(st[::-1])
+        for i in range(len(st)//2):
+            q.append(int(strev[j])*2)
+            j += 2
+        q1 = []
+        for i in q:
+            if i >= 10:
+                y = i - 9
+                q1.append(y)
+            if i < 10:
+                q1.append(i)
+        k = 0
+        s = 0
+        for i in range(len(st)//2):
+            s += (int(strev[k]))
+            k += 2
+        for h in q1:
+            s += h
+        if s % 10 == 0:
+            print('Номер карты правильный')
+        if s % 10 != 0:
+            print('Номер карты неправильный')
+
+
+pravilnay(input())
